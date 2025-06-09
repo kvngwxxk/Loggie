@@ -6,8 +6,22 @@
 //
 
 public enum LogLevel: String, CaseIterable {
-    case debug, log, info, warning, error
+    /// Debug-level logs, typically used for developer-level diagnostics.
+    case debug
 
+    /// General log-level messages, for tracing logic or general events.
+    case log
+
+    /// Informational messages that highlight the progress of the application.
+    case info
+
+    /// Warning messages for recoverable issues or potential problems.
+    case warning
+
+    /// Error messages for serious issues that need attention.
+    case error
+
+    /// An emoji representation for the log level, used in visual display.
     var emoji: String {
         switch self {
         case .debug: return "🐞"
@@ -17,7 +31,9 @@ public enum LogLevel: String, CaseIterable {
         case .error: return "❌"
         }
     }
-    
+
+    /// Numeric severity for sorting or filtering log levels.
+    /// Lower number = lower severity.
     var severity: Int {
         switch self {
         case .debug:   return 0
@@ -27,8 +43,13 @@ public enum LogLevel: String, CaseIterable {
         case .error:   return 4
         }
     }
-    
-    func displayPrefix(usingEmoji: Bool, showLevel: Bool) -> String {
+
+    /// Returns a prefix string for log output based on emoji and level display options.
+    /// - Parameters:
+    ///   - usingEmoji: Whether to include emoji in the output.
+    ///   - showLevel: Whether to include the log level text (e.g. [INFO])
+    /// - Returns: Formatted prefix string
+    internal func displayPrefix(usingEmoji: Bool, showLevel: Bool) -> String {
         let levelText = "[\(rawValue.uppercased())] "
         if usingEmoji && showLevel {
             return "\(emoji) \(levelText)"

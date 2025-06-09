@@ -38,7 +38,6 @@ class LoggieNetworkLogDetailViewController: UIViewController {
         scrollView.backgroundColor = .clear
         view.addSubview(scrollView)
 
-        // Constraints for scrollView
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -46,7 +45,6 @@ class LoggieNetworkLogDetailViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
 
-        // StackView configuration
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .clear
         stackView.axis = .vertical
@@ -54,7 +52,6 @@ class LoggieNetworkLogDetailViewController: UIViewController {
         stackView.alignment = .fill
         stackView.distribution = .fill
 
-        // Add stackView into scrollView's content layout guide
         scrollView.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
@@ -141,7 +138,6 @@ extension LoggieNetworkLogDetailViewController {
     }
 
     private func makeContentLabel(text: String) -> UIView {
-        // Container view to hold the label
         let containerView = UIView()
         containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -157,7 +153,6 @@ extension LoggieNetworkLogDetailViewController {
 
         containerView.addSubview(label)
 
-        // Constraints for label within containerView
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
@@ -172,7 +167,7 @@ extension LoggieNetworkLogDetailViewController {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.isEditable = false
-        tv.isScrollEnabled = false     // 스크롤 없이, 전체 내용을 한 번에 보여주기
+        tv.isScrollEnabled = false
         tv.font = UIFont.monospacedSystemFont(ofSize: 14, weight: .regular)
         tv.textColor = .white
         tv.backgroundColor = .clear
@@ -189,19 +184,16 @@ extension LoggieNetworkLogDetailViewController {
     }
 
     private func makeSeparatorView(length: CGFloat) -> UIView {
-        // Container for separator line
         let containerView = UIView()
         containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
 
-        // A small line whose width is (length + 4) and height is 2
         let lineView = UIView()
         lineView.backgroundColor = .lightGray
         lineView.translatesAutoresizingMaskIntoConstraints = false
 
         containerView.addSubview(lineView)
 
-        // Height of containerView is fixed to 8
         NSLayoutConstraint.activate([
             containerView.heightAnchor.constraint(equalToConstant: 8),
             lineView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
