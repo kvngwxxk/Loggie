@@ -95,7 +95,7 @@ public final class Loggie {
         guard Self.enabledLevels.contains(level) else { return }
         let fileName = URL(fileURLWithPath: file).lastPathComponent.replacingOccurrences(of: ".swift", with: "")
         let prefix = "[\(fileName):\(function) @ \(line)]"
-        let text = "\(level.displayPrefix(usingEmoji: Self.showEmojiInCommonLog, showLevel: Loggie.showLevelInCommonLog))\(prefix) \(message)\n"
+        let text = "\(level.displayPrefix(usingEmoji: Self.showEmojiInCommonLog, showLevel: Loggie.showLevelInCommonLog))\(prefix) \(message)"
         
         
         if Self.useOSLog {
