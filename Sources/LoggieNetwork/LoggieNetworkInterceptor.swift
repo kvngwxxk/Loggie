@@ -36,7 +36,7 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
         completion(.success(mutableRequest))
     }
 
-    // MARK: - RequestRetrier (옵션)
+    // MARK: - RequestRetrier
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         let id = request.request?.value(forHTTPHeaderField: "X-Loggie-ID")
         Task { await pendingLogs.remove(id: id) }
@@ -106,7 +106,7 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
         }
     }
 
-    // MARK: - JSON Pretty Print Helper (기존 그대로 유지)
+    // MARK: - JSON Pretty Print Helper
     private func prettyPrintedJSONString(from data: Data) -> String? {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])

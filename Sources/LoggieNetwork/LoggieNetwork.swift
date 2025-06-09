@@ -9,6 +9,8 @@ import Alamofire
 import SwiftData
 import Loggie
 
+/// Namespace for LoggieNetwork features.
 public enum LoggieNetwork {
+    /// The shared tracker instance that controls network logging UI.
     nonisolated(unsafe) public static let tracker = LoggieNetworkTracker()
 }

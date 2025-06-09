@@ -119,7 +119,6 @@ class PassThroughWindow: UIWindow {
         guard let rootVC = rootViewController else { return false }
         let convertedPoint = rootVC.view.convert(point, from: self)
 
-        // 서브뷰(버튼)만 터치 가능하도록 처리
         for subview in rootVC.view.subviews {
             if
                 !subview.isHidden,
@@ -130,7 +129,6 @@ class PassThroughWindow: UIWindow {
                 return true
             }
         }
-        // 버튼 영역 외에는 아래 윈도우로 터치 전달
         return false
     }
 }

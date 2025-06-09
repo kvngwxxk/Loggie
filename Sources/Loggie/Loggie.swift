@@ -4,6 +4,12 @@
 import Foundation
 import os
 
+/// Logs a message with `.log` level.
+/// - Parameters:
+///   - message: The message to be logged.
+///   - file: The source file name. (Auto-injected)
+///   - function: The function name. (Auto-injected)
+///   - line: The line number. (Auto-injected)
 @inlinable
 public func log(_ message: String,
                 file: String = #file,
@@ -12,6 +18,7 @@ public func log(_ message: String,
     Loggie.shared.log(message, level: .log, file: file, function: function, line: line)
 }
 
+/// Logs a message with `.info` level.
 @inlinable
 public func info(_ message: String,
                  file: String = #file,
@@ -20,6 +27,7 @@ public func info(_ message: String,
     Loggie.info(message, file: file, function: function, line: line)
 }
 
+/// Logs a message with `.debug` level.
 @inlinable
 public func debug(_ message: String,
                  file: String = #file,
@@ -28,6 +36,7 @@ public func debug(_ message: String,
     Loggie.debug(message, file: file, function: function, line: line)
 }
 
+/// Logs a message with `.warning` level.
 @inlinable
 public func warning(_ message: String,
                  file: String = #file,
@@ -36,6 +45,7 @@ public func warning(_ message: String,
     Loggie.warning(message, file: file, function: function, line: line)
 }
 
+/// Logs a message with `.error` level.
 @inlinable
 public func error(_ message: String,
                  file: String = #file,
@@ -44,20 +54,32 @@ public func error(_ message: String,
     Loggie.error(message, file: file, function: function, line: line)
 }
 
+/// The main logging utility class that manages console and file logging.
 public final class Loggie {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.loggie", category: "Loggie")
     private let printQueue = DispatchQueue(label: "com.loggie.print")
     private let fileQueue  = DispatchQueue(label: "com.loggie.file")
     private var fileURL: URL?
     
+    /// The shared singleton instance of `Loggie`.
     nonisolated(unsafe) public static let shared = Loggie()
     
+    /// Controls which log levels are enabled.
     nonisolated(unsafe) public static var enabledLevels: Set<LogLevel> = Set(LogLevel.allCases)
+    
+    /// Whether to use Apple's unified logging system (OSLog).
     nonisolated(unsafe) public static var useOSLog: Bool = false
+    
+    /// Whether to show emoji in common log messages.
     nonisolated(unsafe) public static var showEmojiInCommonLog: Bool = false
+    
+    /// Whether to show log level labels in common logs.
     nonisolated(unsafe) public static var showLevelInCommonLog = false
+    
+    /// Whether to show emoji in fixed-format logs.
     nonisolated(unsafe) public static var showEmoji: Bool = true
     
+    /// Enables or disables file logging.
     nonisolated(unsafe) public static var useFileLogging: Bool = false {
         didSet {
             let instance = Loggie.shared
@@ -166,26 +188,31 @@ public final class Loggie {
 }
 
 extension Loggie {
+    /// Logs a message at debug level.
     @inlinable
     public static func debug(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         Self.shared.logFixedFormat(message, level: .debug, file: file, function: function, line: line)
     }
     
+    /// Logs a message at log level.
     @inlinable
     public static func log(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         Self.shared.log(message, level: .log, file: file, function: function, line: line)
     }
     
+    /// Logs a message at info level.
     @inlinable
     public static func info(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         Self.shared.logFixedFormat(message, level: .info, file: file, function: function, line: line)
     }
     
+    /// Logs a message at warning level.
     @inlinable
     public static func warning(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         Self.shared.logFixedFormat(message, level: .warning, file: file, function: function, line: line)
     }
      
+    /// Logs a message at error level.
     @inlinable
     public static func error(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         Self.shared.logFixedFormat(message, level: .error, file: file, function: function, line: line)

@@ -45,14 +45,11 @@ class LoggieNetworkLogTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(urlLabel)
         
-        // Auto Layout 설정
         NSLayoutConstraint.activate([
-            // titleLabel constraints
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
-            // urlLabel constraints
             urlLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             urlLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             urlLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
@@ -61,14 +58,12 @@ class LoggieNetworkLogTableViewCell: UITableViewCell {
     }
     
     func configure(with log: LoggieNetworkLog) {
-        // 날짜 포매터
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateStr = log.timestamp.flatMap { formatter.string(from: $0) } ?? "N/A"
         let method = log.method ?? "N/A"
         titleLabel.text = "\(dateStr) / \(method.uppercased())"
         
-        // requestURL 표시
         urlLabel.text = log.requestURL ?? "No URL"
     }
 }
