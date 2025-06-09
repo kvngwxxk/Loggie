@@ -1,8 +1,5 @@
 # Loggie
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fkvngwxxk%2FLoggie%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/kvngwxxk/Loggie)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fkvngwxxk%2FLoggie%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/kvngwxxk/Loggie)
-
 **Loggie** is a lightweight, thread-safe logging and network debugging utility for iOS developers.  
 It supports console logging, file logging, OSLog integration, and a floating UI for inspecting Alamofire requests.
 
