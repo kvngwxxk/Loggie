@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Loggie",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(name: "Loggie", targets: ["Loggie"]),
         .library(name: "LoggieNetwork", targets: ["LoggieNetwork"]),
@@ -25,6 +25,10 @@ let package = Package(
             resources: [
               .process("Resources/LoggieNetworkLogModel.xcdatamodeld")
             ]
+        ),
+        .testTarget(
+            name: "LoggieTests",
+            dependencies: ["Loggie"]
         )
     ]
 )
