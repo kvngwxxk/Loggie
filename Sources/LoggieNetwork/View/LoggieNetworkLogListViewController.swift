@@ -146,7 +146,6 @@ extension LoggieNetworkLogListViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Did select row at : \(indexPath.row)")
         let log = logs[indexPath.row]
         let vc = LoggieNetworkLogDetailViewController(debugLog: log)
         self.navigationController?.pushViewController(vc, animated: true)
