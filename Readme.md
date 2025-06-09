@@ -139,7 +139,48 @@ LoggieNetwork.tracker.show()
 LoggieNetwork.tracker.hide()
 ```
 
+#### 💡 When to Show
 
+You should call `LoggieNetwork.tracker.show()` **after the main UI has been rendered**, otherwise the floating button may not attach correctly to the current window.
+
+##### UIKit (SceneDelegate)
+
+```swift
+func sceneDidBecomeActive(_ scene: UIScene) {
+#if DEBUG
+    LoggieNetwork.tracker.show()
+#endif
+}
+```
+
+##### UIKit (AppDelegate)
+
+```swift
+func applicationDidBecomeActive(_ application: UIApplication) {
+#if DEBUG
+    LoggieNetwork.tracker.show()
+#endif
+}
+```
+
+##### SwiftUI
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        MainScreen()
+            .onAppear {
+#if DEBUG
+                DispatchQueue.main.async {
+                    LoggieNetwork.tracker.show()
+                }
+#endif
+            }
+    }
+}
+```
+
+> ☝️ Wrapping `show()` inside `DispatchQueue.main.async` ensures it's called after the view has fully appeared.
 
 ## 📄 License
 
