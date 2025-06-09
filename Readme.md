@@ -3,6 +3,12 @@
 **Loggie** is a lightweight, thread-safe logging and network debugging utility for iOS developers.  
 It supports console logging, file logging, OSLog integration, and a floating UI for inspecting Alamofire requests.
 
+## ✅ Minimum Requirements
+
+- iOS 15.0 or later
+- Swift 5.5 or later
+
+> Loggie uses Swift Concurrency (`actor`, `async/await`) and requires a minimum of Swift 5.5 and iOS 15 runtime support.
 
 
 ## 📦 Installation
@@ -49,6 +55,9 @@ Loggie.useOSLog = true
 Loggie.useFileLogging = true
 ```
 
+> 🔍 Log files are saved in your app's sandbox under:
+> `~/Library/Developer/CoreSimulator/Devices/.../Containers/Data/Application/.../Documents/Loggie/`
+
 > Log files are stored in the app sandbox under `Loggie/`, with timestamped filenames.
 
 
@@ -88,7 +97,12 @@ The output will be:
 ## 🌐 Network Logging (LoggieNetwork)
 
 <p float="left"> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjM5/MDAxNzQ5NDU2MjMzMTEx.g_YRKc2wIDytk8EtvUYSvejTIzbvhPX9AKsXLC6v99Mg.bNYRo4-JwAPzd2q-07HyYMkg6erQKQYaGpehaO6rJgQg.PNG/IMG_0114.PNG?type=w966" width="200" alt="Initial Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTEx/MDAxNzQ5NDU1NjgyMzI0.4byivA48sWQRK8cSxLiDOUYHXUA7fdHmOLbiks0JTcgg.ke7zKVgDdxWwpuxT_GOAzez5_kXInpNQuVjbah7IPjMg.PNG/IMG_0115.PNG?type=w966" width="200" alt="Log List Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTMy/MDAxNzQ5NDU1NjgyMzM2.nweeqpH8PFSiPffUYeK9JlmwrSA3XmkvlFdma5OgqiEg.uQel5YgCacUOAMbdwP8xGek1XVpBpxT7hM7gV1DwciAg.PNG/IMG_0117.PNG?type=w966" width="200" alt="Log Detail Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjY3/MDAxNzQ5NDU1NjgyMzM0.ZUYIeZCa3l-cGrrBp2uh9Bo9KP5ZA6ODGb5tm2HOvj4g.Fw_UYfOaaPbK1iKo2X3W551dRxR2zz_oS91xsR56Rxsg.PNG/IMG_0116.PNG?type=w966" width="200" alt="Clear Alert"/> </p>
-From left to right: Initial Button UI, Log List, Log Detail, Clear Logs Alert Screen.
+
+> From left to right:
+> 1. **Initial Button UI** – The floating Loggie button appears.
+> 2. **Log List Screen** – View a scrollable list of recent network logs.
+> 3. **Log Detail View** – Inspect headers, bodies, and status codes of selected logs.
+> 4. **Clear Logs Alert** – Prompt confirmation before wiping logs.
 
 ### Basic Setup with Alamofire
 
@@ -182,7 +196,21 @@ struct ContentView: View {
 
 > ☝️ Wrapping `show()` inside `DispatchQueue.main.async` ensures it's called after the view has fully appeared.
 
+### 🧯 Troubleshooting
+
+- **LoggieNetwork does not capture requests?**  
+  Ensure `LoggieNetwork.tracker.interceptor` is included both in `.interceptor` and `.eventMonitors`.
+
+- **Floating button does not appear?**  
+  Confirm `LoggieNetwork.tracker.show()` is called *after* the main window is active.
+
 ## 📄 License
 
-MIT License  
+Loggie is released under the [MIT License](LICENSE).
+
+## 🤝 Contribution
+
+Contributions, issues and feature requests are welcome!  
+Feel free to open an issue or submit a pull request.
+
 © 2025 Kangwook Lee
