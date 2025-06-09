@@ -87,10 +87,10 @@ The output will be:
 
 ## 🌐 Network Logging (LoggieNetwork)
 
-![initial page](https://postfiles.pstatic.net/MjAyNTA2MDlfODAg/MDAxNzQ5NDU1NjgyMzQx.wfL6lsqpe659q3ZNuC3yKMcQg875D6VyoLume4mh3lQg.taIY5TvQFO4WuGIbuYYBqVV3cxlZjC0_hNj2rC-5k24g.PNG/IMG_0114.PNG?type=w200)
-![loggie log list](https://postfiles.pstatic.net/MjAyNTA2MDlfMTEx/MDAxNzQ5NDU1NjgyMzI0.4byivA48sWQRK8cSxLiDOUYHXUA7fdHmOLbiks0JTcgg.ke7zKVgDdxWwpuxT_GOAzez5_kXInpNQuVjbah7IPjMg.PNG/IMG_0115.PNG?type=w200)
-![loggie log detail](https://postfiles.pstatic.net/MjAyNTA2MDlfMTMy/MDAxNzQ5NDU1NjgyMzM2.nweeqpH8PFSiPffUYeK9JlmwrSA3XmkvlFdma5OgqiEg.uQel5YgCacUOAMbdwP8xGek1XVpBpxT7hM7gV1DwciAg.PNG/IMG_0117.PNG?type=w200)
-![clear](https://postfiles.pstatic.net/MjAyNTA2MDlfMjY3/MDAxNzQ5NDU1NjgyMzM0.ZUYIeZCa3l-cGrrBp2uh9Bo9KP5ZA6ODGb5tm2HOvj4g.Fw_UYfOaaPbK1iKo2X3W551dRxR2zz_oS91xsR56Rxsg.PNG/IMG_0116.PNG?type=w200)
+![initial page](https://postfiles.pstatic.net/MjAyNTA2MDlfMjM5/MDAxNzQ5NDU2MjMzMTEx.g_YRKc2wIDytk8EtvUYSvejTIzbvhPX9AKsXLC6v99Mg.bNYRo4-JwAPzd2q-07HyYMkg6erQKQYaGpehaO6rJgQg.PNG/IMG_0114.PNG?type=w466)
+![loggie log list](https://postfiles.pstatic.net/MjAyNTA2MDlfMjkg/MDAxNzQ5NDU2MjMzMTUx.LlgMhbVkRhnkYT-0HMP9aQzocOFCuDJzKYbI1_FiInsg.tfLygOaz_Xk8krTi628j88ayVitCBgatlHM268yK3h0g.PNG/IMG_0115.PNG?type=w466)
+![loggie log detail](https://postfiles.pstatic.net/MjAyNTA2MDlfMTg5/MDAxNzQ5NDU2MjMzMTYx.kP3ab48BUvGAEWVcdr5ROmeBra2jhnTO978KcI0YNS8g.o0YKFgFpNo0CmF0braIh29ZzGMtf7n23ylnv9rS38pcg.PNG/IMG_0117.PNG?type=w466)
+![clear](https://postfiles.pstatic.net/MjAyNTA2MDlfMjY0/MDAxNzQ5NDU2MjMzMTYw.Pw7JCYnLUesSABMxI6Wo70nQLC6Xzgpsz20ScQVYeYQg.J12pcftms3FL9n80DAE8mVeY5WJzQ0rGLdNVNS7n65Ug.PNG/IMG_0116.PNG?type=w466)
 
 ### Basic Setup with Alamofire
 
