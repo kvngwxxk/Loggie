@@ -58,23 +58,13 @@ class LoggieNetworkLogTableViewCell: UITableViewCell {
     }
     
     func configure(with log: LoggieNetworkLog, isExample: Bool = false) {
-        if isExample {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateStr = "2025-06-09 16:39:56"
-            let method = "GET"
-            titleLabel.text = "\(dateStr) / \(method.uppercased())"
-            
-            urlLabel.text = "https://my-server.com/api/example"
-        } else {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateStr = log.timestamp.flatMap { formatter.string(from: $0) } ?? "N/A"
-            let method = log.method ?? "N/A"
-            titleLabel.text = "\(dateStr) / \(method.uppercased())"
-            
-            urlLabel.text = log.requestURL ?? "No URL"
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateStr = log.timestamp.flatMap { formatter.string(from: $0) } ?? "N/A"
+        let method = log.method ?? "N/A"
+        titleLabel.text = "\(dateStr) / \(method.uppercased())"
+        
+        urlLabel.text = log.requestURL ?? "No URL"
     }
 }
 
