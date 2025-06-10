@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Loggie'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Lightweight logging and network tracking tool for iOS developers'
   s.description      = <<-DESC
     Loggie provides lightweight, thread-safe logging to the console and files,
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.subspec 'Network' do |net|
     net.resources = ['Sources/LoggieNetwork/Resources/**/*']
     net.source_files = 'Sources/LoggieNetwork/**/*'
-    net.dependency 'Alamofire', '~> 5.10'
+    net.dependency 'Alamofire', '~> 5.6'
     net.dependency 'Loggie'
     net.frameworks = 'Foundation', 'UIKit', 'CoreData'
   end
