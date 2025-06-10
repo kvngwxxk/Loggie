@@ -101,6 +101,11 @@ The output will be:
 
 ## 🌐 Network Logging (LoggieNetwork)
 
+**LoggieNetwork** makes it easy to track and inspect network activity in your app.  
+It automatically logs your **Alamofire requests and responses**, and provides a **floating button UI** to browse the logs in real time.
+
+No need to manually print or debug – just turn it on and you're ready to go.
+
 <p float="left"> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjM5/MDAxNzQ5NDU2MjMzMTEx.g_YRKc2wIDytk8EtvUYSvejTIzbvhPX9AKsXLC6v99Mg.bNYRo4-JwAPzd2q-07HyYMkg6erQKQYaGpehaO6rJgQg.PNG/IMG_0114.PNG?type=w966" width="200" alt="Initial Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTEx/MDAxNzQ5NDU1NjgyMzI0.4byivA48sWQRK8cSxLiDOUYHXUA7fdHmOLbiks0JTcgg.ke7zKVgDdxWwpuxT_GOAzez5_kXInpNQuVjbah7IPjMg.PNG/IMG_0115.PNG?type=w966" width="200" alt="Log List Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTMy/MDAxNzQ5NDU1NjgyMzM2.nweeqpH8PFSiPffUYeK9JlmwrSA3XmkvlFdma5OgqiEg.uQel5YgCacUOAMbdwP8xGek1XVpBpxT7hM7gV1DwciAg.PNG/IMG_0117.PNG?type=w966" width="200" alt="Log Detail Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjY3/MDAxNzQ5NDU1NjgyMzM0.ZUYIeZCa3l-cGrrBp2uh9Bo9KP5ZA6ODGb5tm2HOvj4g.Fw_UYfOaaPbK1iKo2X3W551dRxR2zz_oS91xsR56Rxsg.PNG/IMG_0116.PNG?type=w966" width="200" alt="Clear Alert"/> </p>
 
 > From left to right:
