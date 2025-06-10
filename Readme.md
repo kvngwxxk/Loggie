@@ -1,14 +1,18 @@
 # Loggie
 
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fkvngwxxk%2FLoggie%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/kvngwxxk/Loggie)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fkvngwxxk%2FLoggie%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/kvngwxxk/Loggie)
+
 **Loggie** is a lightweight, thread-safe logging and network debugging utility for iOS developers.  
 It supports console logging, file logging, OSLog integration, and a floating UI for inspecting Alamofire requests.
 
 ## ✅ Minimum Requirements
 
 - iOS 15.0 or later
-- Swift 5.5 or later
+- Swift 5.7 or later
 
 > Loggie uses Swift Concurrency (`actor`, `async/await`) and requires a minimum of Swift 5.5 and iOS 15 runtime support.
+> Although the package manifest specifies Swift 6.0 due to the use of `swift-testing` in test targets, the core library itself is fully compatible with Swift 5.7+ and iOS 15+.
 
 
 ## 📦 Installation
