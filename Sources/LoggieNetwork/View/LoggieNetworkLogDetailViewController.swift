@@ -62,138 +62,67 @@ class LoggieNetworkLogDetailViewController: UIViewController {
         ])
     }
 
-    private func setupStackView(log: LoggieNetworkLog, isExample: Bool = false) {
-        if isExample {
-            let timestampLabel = makeTitleLabel(text: "Timestamp")
-            stackView.addArrangedSubview(timestampLabel)
-            let tsSep = makeSeparatorView(length: timestampLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(tsSep)
-            let textView = makeContentTextView(text: "2025-06-09 16:39:56 +0000")
+    private func setupStackView(log: LoggieNetworkLog) {
+        let timestampLabel = makeTitleLabel(text: "Timestamp")
+        stackView.addArrangedSubview(timestampLabel)
+        let tsSep = makeSeparatorView(length: timestampLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(tsSep)
+        if let timestamp = log.timestamp {
+            let textView = makeContentTextView(text: "\(timestamp)")
             stackView.addArrangedSubview(textView)
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-            
-            let responseStatusCodeLabel = makeTitleLabel(text: "Response Status Code : 200")
-            stackView.addArrangedSubview(responseStatusCodeLabel)
-            let statusSep = makeSeparatorView(length: responseStatusCodeLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(statusSep)
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let durationLabel = makeTitleLabel(text: "Duration")
-            stackView.addArrangedSubview(durationLabel)
-            let durSep = makeSeparatorView(length: durationLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(durSep)
-            stackView.addArrangedSubview(makeContentTextView(text: "341ms"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let requestURLLabel = makeTitleLabel(text: "Request URL")
-            stackView.addArrangedSubview(requestURLLabel)
-            let urlSep = makeSeparatorView(length: requestURLLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(urlSep)
-            stackView.addArrangedSubview(makeContentTextView(text:  "https://my-server.com/api/example"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let endPointLabel = makeTitleLabel(text: "End Point")
-            stackView.addArrangedSubview(endPointLabel)
-            let endSep = makeSeparatorView(length: endPointLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(endSep)
-            stackView.addArrangedSubview(makeContentTextView(text: "/api/example"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let methodLabel = makeTitleLabel(text: "Method")
-            stackView.addArrangedSubview(methodLabel)
-            let methodSep = makeSeparatorView(length: methodLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(methodSep)
-            stackView.addArrangedSubview(makeContentTextView(text: "GET"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let requestBodyLabel = makeTitleLabel(text: "Request Body")
-            stackView.addArrangedSubview(requestBodyLabel)
-            let bodySep = makeSeparatorView(length: requestBodyLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(bodySep)
-            let requestText = """
-            {
-                "id" : "ABCDEFGH-IJKL-1234-MNOP-QRSTUVWXY567",
-                "token" : "sometokenstrings"
-                "user_type" : "1"
-            }
-            """
-            stackView.addArrangedSubview(makeContentTextView(text: requestText))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let responseDataLabel = makeTitleLabel(text: "Response Data")
-            stackView.addArrangedSubview(responseDataLabel)
-            let dataSep = makeSeparatorView(length: responseDataLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(dataSep)
-            let responseText = """
-            {
-                "code" : 1,
-                "message" : "The user does not exist." 
-            }
-            """
-            stackView.addArrangedSubview(makeContentTextView(text: responseText))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
         } else {
-            let timestampLabel = makeTitleLabel(text: "Timestamp")
-            stackView.addArrangedSubview(timestampLabel)
-            let tsSep = makeSeparatorView(length: timestampLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(tsSep)
-            if let timestamp = log.timestamp {
-                let textView = makeContentTextView(text: "\(timestamp)")
-                stackView.addArrangedSubview(textView)
-            } else {
-                let textView = makeContentTextView(text: "Unable to retrieve timestamp.")
-                stackView.addArrangedSubview(textView)
-            }
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-            
-            let responseStatusCodeLabel = makeTitleLabel(text: "Response Status Code : \(log.responseStatusCode)")
-            stackView.addArrangedSubview(responseStatusCodeLabel)
-            let statusSep = makeSeparatorView(length: responseStatusCodeLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(statusSep)
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let durationLabel = makeTitleLabel(text: "Duration")
-            stackView.addArrangedSubview(durationLabel)
-            let durSep = makeSeparatorView(length: durationLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(durSep)
-            stackView.addArrangedSubview(makeContentTextView(text: "\(Int(log.duration))ms"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let requestURLLabel = makeTitleLabel(text: "Request URL")
-            stackView.addArrangedSubview(requestURLLabel)
-            let urlSep = makeSeparatorView(length: requestURLLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(urlSep)
-            stackView.addArrangedSubview(makeContentTextView(text: log.requestURL ?? "NO REQUEST URL"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let endPointLabel = makeTitleLabel(text: "End Point")
-            stackView.addArrangedSubview(endPointLabel)
-            let endSep = makeSeparatorView(length: endPointLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(endSep)
-            stackView.addArrangedSubview(makeContentTextView(text: log.endPoint ?? "NO END POINT"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let methodLabel = makeTitleLabel(text: "Method")
-            stackView.addArrangedSubview(methodLabel)
-            let methodSep = makeSeparatorView(length: methodLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(methodSep)
-            stackView.addArrangedSubview(makeContentTextView(text: log.method ?? "NO METHOD"))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let requestBodyLabel = makeTitleLabel(text: "Request Body")
-            stackView.addArrangedSubview(requestBodyLabel)
-            let bodySep = makeSeparatorView(length: requestBodyLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(bodySep)
-            stackView.addArrangedSubview(makeContentTextView(text: log.requestBody))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
-
-            let responseDataLabel = makeTitleLabel(text: "Response Data")
-            stackView.addArrangedSubview(responseDataLabel)
-            let dataSep = makeSeparatorView(length: responseDataLabel.intrinsicContentSize.width)
-            stackView.addArrangedSubview(dataSep)
-            stackView.addArrangedSubview(makeContentTextView(text: log.responseData))
-            stackView.addArrangedSubview(makeSpaceView(height: 10))
+            let textView = makeContentTextView(text: "Unable to retrieve timestamp.")
+            stackView.addArrangedSubview(textView)
         }
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+        
+        let responseStatusCodeLabel = makeTitleLabel(text: "Response Status Code : \(log.responseStatusCode)")
+        stackView.addArrangedSubview(responseStatusCodeLabel)
+        let statusSep = makeSeparatorView(length: responseStatusCodeLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(statusSep)
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+
+        let durationLabel = makeTitleLabel(text: "Duration")
+        stackView.addArrangedSubview(durationLabel)
+        let durSep = makeSeparatorView(length: durationLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(durSep)
+        stackView.addArrangedSubview(makeContentTextView(text: "\(Int(log.duration))ms"))
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+
+        let requestURLLabel = makeTitleLabel(text: "Request URL")
+        stackView.addArrangedSubview(requestURLLabel)
+        let urlSep = makeSeparatorView(length: requestURLLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(urlSep)
+        stackView.addArrangedSubview(makeContentTextView(text: log.requestURL ?? "NO REQUEST URL"))
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+
+        let endPointLabel = makeTitleLabel(text: "End Point")
+        stackView.addArrangedSubview(endPointLabel)
+        let endSep = makeSeparatorView(length: endPointLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(endSep)
+        stackView.addArrangedSubview(makeContentTextView(text: log.endPoint ?? "NO END POINT"))
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+
+        let methodLabel = makeTitleLabel(text: "Method")
+        stackView.addArrangedSubview(methodLabel)
+        let methodSep = makeSeparatorView(length: methodLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(methodSep)
+        stackView.addArrangedSubview(makeContentTextView(text: log.method ?? "NO METHOD"))
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+
+        let requestBodyLabel = makeTitleLabel(text: "Request Body")
+        stackView.addArrangedSubview(requestBodyLabel)
+        let bodySep = makeSeparatorView(length: requestBodyLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(bodySep)
+        stackView.addArrangedSubview(makeContentTextView(text: log.requestBody))
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
+
+        let responseDataLabel = makeTitleLabel(text: "Response Data")
+        stackView.addArrangedSubview(responseDataLabel)
+        let dataSep = makeSeparatorView(length: responseDataLabel.intrinsicContentSize.width)
+        stackView.addArrangedSubview(dataSep)
+        stackView.addArrangedSubview(makeContentTextView(text: log.responseData))
+        stackView.addArrangedSubview(makeSpaceView(height: 10))
     }
 }
 
