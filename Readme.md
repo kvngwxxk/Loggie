@@ -8,12 +8,10 @@ It supports console logging, file logging, OSLog integration, and a floating UI 
 
 ## ✅ Minimum Requirements
 
-- iOS 15.0 or later
-- Swift 5.7 or later
+- iOS 16.0 or later
+- Swift 5.9 or later
 
-> Loggie uses Swift Concurrency (`actor`, `async/await`) and requires a minimum of Swift 5.5 and iOS 15 runtime support.
-> 
-> Although the package manifest specifies Swift 6.0 due to the use of `swift-testing` in test targets, the core library itself is fully compatible with Swift 5.7+ and iOS 15+.
+> Although the package manifest specifies Swift 6.0 due to the use of `swift-testing` in test targets, the core library itself is fully compatible with Swift 5.9+ and iOS 16+.
 
 
 ## 📦 Installation
@@ -21,7 +19,7 @@ It supports console logging, file logging, OSLog integration, and a floating UI 
 ### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/kvngwxxk/Loggie.git", from: "1.0.0")
+.package(url: "https://github.com/kvngwxxk/Loggie.git", from: "1.0.1")
 ```
 
 ### CocoaPods
