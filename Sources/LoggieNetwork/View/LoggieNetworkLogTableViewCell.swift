@@ -57,7 +57,7 @@ class LoggieNetworkLogTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with log: LoggieNetworkLog, isExample: Bool = false) {
+    func configure(with log: LoggieNetworkLog) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateStr = log.timestamp.flatMap { formatter.string(from: $0) } ?? "N/A"

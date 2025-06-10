@@ -19,7 +19,7 @@ It supports console logging, file logging, OSLog integration, and a floating UI 
 ### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/kvngwxxk/Loggie.git", from: "1.0.1")
+.package(url: "https://github.com/kvngwxxk/Loggie.git", from: "1.0.2")
 ```
 
 ### CocoaPods

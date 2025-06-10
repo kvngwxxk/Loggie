@@ -62,7 +62,7 @@ class LoggieNetworkLogDetailViewController: UIViewController {
         ])
     }
 
-    private func setupStackView(log: LoggieNetworkLog, isExample: Bool = false) {
+    private func setupStackView(log: LoggieNetworkLog) {
         let timestampLabel = makeTitleLabel(text: "Timestamp")
         stackView.addArrangedSubview(timestampLabel)
         let tsSep = makeSeparatorView(length: timestampLabel.intrinsicContentSize.width)
