@@ -140,7 +140,7 @@ extension LoggieNetworkLogListViewController: UITableViewDataSource, UITableView
         }
         
         let log = logs[indexPath.row]
-        cell.configure(with: log)
+        cell.configure(with: log, isExample: true)
         
         return cell
     }

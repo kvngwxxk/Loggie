@@ -28,7 +28,7 @@ class LoggieNetworkLogDetailViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationItem.title = ""
         setupScrollView()
-        setupStackView(log: debugLog)
+        setupStackView(log: debugLog, isExample: true)
     }
 
     private func setupScrollView() {
