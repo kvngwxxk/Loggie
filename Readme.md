@@ -3,6 +3,8 @@
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fkvngwxxk%2FLoggie%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/kvngwxxk/Loggie)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fkvngwxxk%2FLoggie%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/kvngwxxk/Loggie)
 
+[View in Korean](Readme_KR.md)
+
 **Loggie** is a lightweight, thread-safe logging and network debugging utility for iOS developers.  
 It supports console logging, file logging, OSLog integration, and a floating UI for inspecting Alamofire requests.
 
@@ -104,13 +106,12 @@ It automatically logs your **Alamofire requests and responses**, and provides a 
 
 No need to manually print or debug – just turn it on and you're ready to go.
 
-<p float="left"> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjM5/MDAxNzQ5NDU2MjMzMTEx.g_YRKc2wIDytk8EtvUYSvejTIzbvhPX9AKsXLC6v99Mg.bNYRo4-JwAPzd2q-07HyYMkg6erQKQYaGpehaO6rJgQg.PNG/IMG_0114.PNG?type=w966" width="200" alt="Initial Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTEx/MDAxNzQ5NDU1NjgyMzI0.4byivA48sWQRK8cSxLiDOUYHXUA7fdHmOLbiks0JTcgg.ke7zKVgDdxWwpuxT_GOAzez5_kXInpNQuVjbah7IPjMg.PNG/IMG_0115.PNG?type=w966" width="200" alt="Log List Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTMy/MDAxNzQ5NDU1NjgyMzM2.nweeqpH8PFSiPffUYeK9JlmwrSA3XmkvlFdma5OgqiEg.uQel5YgCacUOAMbdwP8xGek1XVpBpxT7hM7gV1DwciAg.PNG/IMG_0117.PNG?type=w966" width="200" alt="Log Detail Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjY3/MDAxNzQ5NDU1NjgyMzM0.ZUYIeZCa3l-cGrrBp2uh9Bo9KP5ZA6ODGb5tm2HOvj4g.Fw_UYfOaaPbK1iKo2X3W551dRxR2zz_oS91xsR56Rxsg.PNG/IMG_0116.PNG?type=w966" width="200" alt="Clear Alert"/> </p>
+<p float="left"> <img src="https://postfiles.pstatic.net/MjAyNTA2MTBfMTYg/MDAxNzQ5NTM0MDYxMjY1.0XJcEX4R9NtOb8zAEv46QsqYEK0Zmg2eE-cMic76MEAg.Y2GMhHMbsfSI40WkqNqp0nmgi6DVHQKgr8z5adhoE_8g.GIF/ezgif-302d48573bcaa4.gif?type=w3840" width="200" alt="video"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMjM5/MDAxNzQ5NDU2MjMzMTEx.g_YRKc2wIDytk8EtvUYSvejTIzbvhPX9AKsXLC6v99Mg.bNYRo4-JwAPzd2q-07HyYMkg6erQKQYaGpehaO6rJgQg.PNG/IMG_0114.PNG?type=w966" width="200" alt="Initial Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTEx/MDAxNzQ5NDU1NjgyMzI0.4byivA48sWQRK8cSxLiDOUYHXUA7fdHmOLbiks0JTcgg.ke7zKVgDdxWwpuxT_GOAzez5_kXInpNQuVjbah7IPjMg.PNG/IMG_0115.PNG?type=w966" width="200" alt="Log List Screen"/> <img src="https://postfiles.pstatic.net/MjAyNTA2MDlfMTMy/MDAxNzQ5NDU1NjgyMzM2.nweeqpH8PFSiPffUYeK9JlmwrSA3XmkvlFdma5OgqiEg.uQel5YgCacUOAMbdwP8xGek1XVpBpxT7hM7gV1DwciAg.PNG/IMG_0117.PNG?type=w966" width="200" alt="Log Detail Screen"/> </p>
 
 > From left to right:
 > 1. **Initial Button UI** – The floating Loggie button appears.
 > 2. **Log List Screen** – View a scrollable list of recent network logs.
 > 3. **Log Detail View** – Inspect headers, bodies, and status codes of selected logs.
-> 4. **Clear Logs Alert** – Prompt confirmation before wiping logs.
 
 ### Basic Setup with Alamofire
 
@@ -220,5 +221,3 @@ Loggie is released under the [MIT License](LICENSE).
 
 Contributions, issues and feature requests are welcome!  
 Feel free to open an issue or submit a pull request.
-
-© 2025 Kangwook Lee

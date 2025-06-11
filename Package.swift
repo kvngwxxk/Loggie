@@ -1,11 +1,11 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "Loggie",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(name: "Loggie", targets: ["Loggie"]),
         .library(name: "LoggieNetwork", targets: ["LoggieNetwork"]),
@@ -23,12 +23,19 @@ let package = Package(
             ],
             path: "Sources/LoggieNetwork",
             resources: [
-              .process("Resources/LoggieNetworkLogModel.xcdatamodeld")
+                .process("Resources/LoggieNetworkLogModel.xcdatamodeld")
+            ],
+            linkerSettings: [
+                .linkedFramework("CoreData")
             ]
         ),
         .testTarget(
             name: "LoggieTests",
             dependencies: ["Loggie"]
+        ),
+        .testTarget(
+            name: "LoggieNetworkTests",
+            dependencies: ["LoggieNetwork"]
         )
     ]
 )
