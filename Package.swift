@@ -26,7 +26,8 @@ let package = Package(
                 .process("Resources/LoggieNetworkLogModel.xcdatamodeld")
             ],
             linkerSettings: [
-                .linkedFramework("CoreData")
+                .linkedFramework("CoreData"),
+                .linkedFramework("WebKit")
             ]
         ),
         .testTarget(

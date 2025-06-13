@@ -9,6 +9,7 @@
         <attribute name="requestURL" optional="YES" attributeType="String"/>
         <attribute name="responseData" attributeType="String"/>
         <attribute name="responseStatusCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" defaultValueString="App"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
 </model>

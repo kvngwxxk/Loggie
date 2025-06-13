@@ -28,30 +28,28 @@ class LoggieNetworkLogListViewController: UIViewController {
     }
     
     private func setupUI() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Clear",
+        let gearImage = UIImage(systemName: "gearshape.fill")
+        let settingsItem = UIBarButtonItem(
+            image: gearImage,
             style: .plain,
             target: self,
-            action: #selector(didTapClearButton)
+            action: #selector(didTapSettingsButton)
         )
-        navigationItem.leftBarButtonItem?.tintColor = .systemRed
+        settingsItem.tintColor = .white
+        navigationItem.leftBarButtonItem = settingsItem
 
-        // 2) Close 버튼 (오른쪽 바 버튼)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Close",
+        let xImage = UIImage(systemName: "xmark")
+        let xItem = UIBarButtonItem(
+            image: xImage,
             style: .plain,
             target: self,
             action: #selector(didTapCloseButton)
         )
-        navigationItem.rightBarButtonItem?.tintColor = .white
+        xItem.tintColor = .white
+        navigationItem.rightBarButtonItem = xItem
 
-        // (추가로) 네비게이션 바 제목을 가운데가 아닌, 인라인으로 표시하고 싶다면:
         navigationController?.navigationBar.prefersLargeTitles = false
         
-
-        
-
-        // TableView 설정
         tableView.backgroundColor = .clear
         tableView.register(LoggieNetworkLogTableViewCell.self, forCellReuseIdentifier: LoggieNetworkLogTableViewCell.reusableIdentifier)
         tableView.dataSource = self
@@ -60,12 +58,9 @@ class LoggieNetworkLogListViewController: UIViewController {
         tableView.isScrollEnabled = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        // 서브뷰 추가
         view.addSubview(tableView)
 
-        // NSLayoutConstraint.activate로 제약 설정
         NSLayoutConstraint.activate([
-            // tableView 제약
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -81,7 +76,6 @@ class LoggieNetworkLogListViewController: UIViewController {
         let fetchStart = DispatchTime.now()
         let context = CoreDataManager.shared.context
         let request: NSFetchRequest<LoggieNetworkLog> = LoggieNetworkLog.fetchRequest()
-        // timestamp를 기준으로 내림차순 정렬 (최신 로그가 위로)
         let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
         request.sortDescriptors = [sortDescriptor]
         
@@ -102,6 +96,10 @@ class LoggieNetworkLogListViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             LoggieNetworkFloatingButtonManager.shared.showButton()
         }
+    }
+    
+    @objc func didTapSettingsButton() {
+        
     }
     
     @objc func didTapClearButton() {
