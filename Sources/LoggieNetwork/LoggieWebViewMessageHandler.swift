@@ -28,19 +28,15 @@ final class LoggieWebViewMessageHandler: NSObject, WKScriptMessageHandler {
             return
         }
 
-        // 1) 원본 String → Data
         let reqData = Data(rawReq.utf8)
         let resData = Data(rawRes.utf8)
 
-        // 2) Data → pretty‐printed Data (JSON or QueryString)
         let prettyReqData = transformedBodyData(from: reqData, contentType: "application/json")
         let prettyResData = transformedBodyData(from: resData, contentType: "application/json")
 
-        // 3) Data → String (fallback to raw)
         let prettyReq = String(data: prettyReqData, encoding: .utf8) ?? "There is no request body."
         let prettyRes = String(data: prettyResData, encoding: .utf8) ?? "There is no response data."
 
-        // 4) Core Data에 기록
         Task {
             let ctx = CoreDataManager.shared.backgroundContext()
             try await ctx.performAsync {
@@ -60,7 +56,6 @@ final class LoggieWebViewMessageHandler: NSObject, WKScriptMessageHandler {
         }
     }
 
-    // ─── 아래 세 헬퍼는 interceptor와 **똑같이** 가져온 것 ───
 
     private func prettyPrintedJSONString(from data: Data) -> String? {
         do {
@@ -95,17 +90,14 @@ final class LoggieWebViewMessageHandler: NSObject, WKScriptMessageHandler {
     }
 
     private func transformedBodyData(from data: Data, contentType: String?) -> Data {
-        // JSON 우선
         if contentType?.contains("application/json") == true,
            let prettyString = prettyPrintedJSONString(from: data),
            let prettyData = prettyString.data(using: .utf8) {
             return prettyData
         }
-        // query-string 다음
         else if let prettyData = prettyPrintedQueryStringData(from: data) {
             return prettyData
         }
-        // 그 외엔 원본
         return data
     }
 }

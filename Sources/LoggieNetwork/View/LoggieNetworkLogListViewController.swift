@@ -24,7 +24,10 @@ class LoggieNetworkLogListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "Network Logs"
+        super.viewWillAppear(animated)
+        
+        let bundle = Bundle.overrideBundle
+        title = String(localized: "title.network.log", bundle: bundle)
     }
     
     private func setupUI() {
@@ -49,6 +52,7 @@ class LoggieNetworkLogListViewController: UIViewController {
         navigationItem.rightBarButtonItem = xItem
 
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         tableView.backgroundColor = .clear
         tableView.register(LoggieNetworkLogTableViewCell.self, forCellReuseIdentifier: LoggieNetworkLogTableViewCell.reusableIdentifier)
@@ -56,6 +60,7 @@ class LoggieNetworkLogListViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .singleLine
         tableView.isScrollEnabled = true
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
@@ -92,38 +97,16 @@ class LoggieNetworkLogListViewController: UIViewController {
     }
     
     @objc func didTapCloseButton() {
-        dismiss(animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            LoggieNetworkFloatingButtonManager.shared.showButton()
+        dismiss(animated: true) {
+            DispatchQueue.main.async {
+                LoggieNetworkFloatingButtonManager.shared.showButton()
+            }
         }
     }
     
     @objc func didTapSettingsButton() {
-        
-    }
-    
-    @objc func didTapClearButton() {
-        print("did tap clear")
-        let vc = UIAlertController(title: "Notice", message: "Do you want to delete all logs?", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
-            CoreDataManager.shared.deleteAllData() { result in
-                switch result {
-                case .success:
-                    ()
-                case .failure(let error):
-                    ()
-                }
-                
-                self.fetchLogs()
-                self.didTapCloseButton()
-            }
-        }
-        let closeAction = UIAlertAction(title: "Cancel", style: .default)
-        
-        vc.addAction(closeAction)
-        vc.addAction(confirmAction)
-        
-        present(vc, animated: false)
+        let vc = LoggieNetworkSettingsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

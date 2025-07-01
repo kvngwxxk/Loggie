@@ -64,7 +64,7 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
                     let duration = Date().timeIntervalSince(pendingData.startTime) * 1000
                     log.source = "App"
                     log.duration = duration
-                    log.timestamp = Date()  // 응답 시각
+                    log.timestamp = Date()  
                     log.endPoint = pendingData.endpoint
                     log.requestURL = pendingData.requestURL
                     log.method = pendingData.method

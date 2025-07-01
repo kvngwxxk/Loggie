@@ -27,6 +27,17 @@ final internal class LoggieNetworkFloatingButtonManager {
     }
     
     internal func showButton(animated: Bool = true) {
+        if let top = UIApplication.topViewController() {
+            switch top {
+            case is LoggieNetworkLogListViewController,
+                 is LoggieNetworkLogDetailViewController,
+                 is LoggieNetworkSettingsViewController:
+                return
+            default:
+                break
+            }
+        }
+        
         if let btn = logButton {
             btn.isHidden = false
             animate(btn: btn, appear: true, animated: animated)
