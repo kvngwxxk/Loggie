@@ -18,6 +18,11 @@ public func log(_ message: String,
     Loggie.shared.log(message, level: .log, file: file, function: function, line: line)
 }
 
+@inlinable
+public func log<T>(_ object: T, file: String = #file, function: String = #function, line: Int = #line) {
+    Loggie.shared.log(String(describing: object), level: .log, file: file, function: function, line: line)
+}
+
 /// Logs a message with `.info` level.
 @inlinable
 public func info(_ message: String,
@@ -84,11 +89,9 @@ public final class Loggie {
         didSet {
             let instance = Loggie.shared
             if useFileLogging {
-                // 디렉터리 생성
                 if !FileManager.default.fileExists(atPath: instance.defaultLogDirectory.path) {
                     try? FileManager.default.createDirectory(at: instance.defaultLogDirectory, withIntermediateDirectories: true)
                 }
-                // 파일 생성 & 저장
                 let filename = "Loggie_\(instance.isoFormatter.string(from: Date())).log"
                 let url = instance.defaultLogDirectory.appendingPathComponent(filename)
                 if !FileManager.default.fileExists(atPath: url.path) {

@@ -11,7 +11,7 @@ It supports console logging, file logging, OSLog integration, and a floating UI 
 ## ✅ Minimum Requirements
 
 - iOS 15.0 or later
-- Swift 5.7 or later
+- Swift 5.9 or later
 
 > Although the package manifest specifies Swift 6.0 due to the use of `swift-testing` in test targets, the core library itself is fully compatible with Swift 5.7+ and iOS 15+.
 

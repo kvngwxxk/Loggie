@@ -9,6 +9,8 @@ import CoreData
 
 /// Stores pending request metadata temporarily in memory using an actor for concurrency safety.
 actor PendingLogsStore {
+    static let shared = PendingLogsStore()
+    
     /// Metadata for a request being tracked.
     struct RequestData {
         let requestURL: String?

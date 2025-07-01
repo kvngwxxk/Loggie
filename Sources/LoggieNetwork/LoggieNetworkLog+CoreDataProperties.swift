@@ -22,6 +22,7 @@ extension LoggieNetworkLog {
                                           in: CoreDataManager.shared.context)!
     }
     
+    @NSManaged public var source: String?
     @NSManaged public var duration: Double
     @NSManaged public var endPoint: String?
     @NSManaged public var id: UUID?

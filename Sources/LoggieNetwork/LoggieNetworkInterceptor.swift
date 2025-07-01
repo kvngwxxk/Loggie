@@ -11,7 +11,7 @@ import Loggie
 
 final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
     let queue = DispatchQueue(label: "loggie.network.interceptor")
-    private let pendingLogs = PendingLogsStore()
+    private let pendingLogs = PendingLogsStore.shared
 
     // MARK: - RequestAdapter
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
@@ -62,9 +62,9 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
                     log.id = UUID()
                     
                     let duration = Date().timeIntervalSince(pendingData.startTime) * 1000
-                    
+                    log.source = "App"
                     log.duration = duration
-                    log.timestamp = Date()  // 응답 시각
+                    log.timestamp = Date()  
                     log.endPoint = pendingData.endpoint
                     log.requestURL = pendingData.requestURL
                     log.method = pendingData.method
