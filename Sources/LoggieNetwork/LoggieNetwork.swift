@@ -13,4 +13,6 @@ import Loggie
 public enum LoggieNetwork {
     /// The shared tracker instance that controls network logging UI.
     nonisolated(unsafe) public static let tracker = LoggieNetworkTracker()
+    
+    nonisolated(unsafe) public static var printAPILatency: Bool = false
 }

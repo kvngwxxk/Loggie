@@ -93,7 +93,9 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
                         log.responseStatusCode = Int16(httpResponse.statusCode)
                     }
                     
-                    Loggie.log("[Interceptor] API Latency: \(duration) ms")
+                    if LoggieNetwork.printAPILatency {
+                        print("[Interceptor] API Latency: \(duration) ms")
+                    }
                     
                     try context.save()
                 }
