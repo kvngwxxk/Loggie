@@ -6,6 +6,7 @@
 //
 
 import WebKit
+import Loggie
 
 final class LoggieWebViewMessageHandler: NSObject, WKScriptMessageHandler {
     static let shared = LoggieWebViewMessageHandler()
@@ -66,7 +67,7 @@ final class LoggieWebViewMessageHandler: NSObject, WKScriptMessageHandler {
             )
             return String(data: prettyData, encoding: .utf8)
         } catch {
-            print("JSON pretty print failed: \(error)")
+            log("JSON pretty print failed: \(error)")
             return nil
         }
     }

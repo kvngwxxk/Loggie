@@ -51,7 +51,7 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
         
         Task {
             guard let pendingData = await pendingLogs.get(id: requestID) else {
-                print("[Interceptor] 대응되는 request 데이터가 없습니다.")
+                log("[Interceptor] 대응되는 request 데이터가 없습니다.")
                 return
             }
             
@@ -93,7 +93,7 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
                         log.responseStatusCode = Int16(httpResponse.statusCode)
                     }
                     
-                    print("[Interceptor] API Latency: \(duration) ms")
+                    Loggie.log("[Interceptor] API Latency: \(duration) ms")
                     
                     try context.save()
                 }
@@ -101,19 +101,19 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
                 await pendingLogs.remove(id: requestID)
                 
             } catch {
-                print("[Interceptor] Response 로그 저장 실패: \(error)")
+                log("[Interceptor] Response 로그 저장 실패: \(error)")
             }
         }
     }
 
-    // MARK: - JSON Pretty Print Helper
+    // MARK: - JSON Pretty log Helper
     private func prettyPrintedJSONString(from data: Data) -> String? {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
             let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted])
             return String(data: prettyData, encoding: .utf8)
         } catch {
-            print("JSON pretty print failed: \(error)")
+            log("JSON pretty log failed: \(error)")
             return nil
         }
     }
