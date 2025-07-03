@@ -127,9 +127,7 @@ class LoggieNetworkSettingsViewController: UIViewController {
     @objc private func didTapFirstSection(_ gr: UITapGestureRecognizer) {
         guard gr.view?.tag == 1 else { return }
         
-        print("  ▶️ 토글 전 currentLanguage:", currentLanguage.rawValue)
         currentLanguage.toggle()
-        print("  ▶️ 토글 후 currentLanguage:", currentLanguage.rawValue)
 
         UserDefaults.standard.set(currentLanguage.rawValue, forKey: "LoggieLanguage")
         Bundle.setOverrideLanguage(currentLanguage)

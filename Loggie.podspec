@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Loggie'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'Lightweight logging and network tracking tool for iOS developers'
   s.description      = <<-DESC
     Loggie provides lightweight, thread-safe logging to the console and files,

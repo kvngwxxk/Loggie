@@ -6,6 +6,6 @@
 //
 
 public enum LoggieVersion {
-    public static let short = "1.1.0"
+    public static let short = "1.1.1"
     public static let build = "1"
 }
