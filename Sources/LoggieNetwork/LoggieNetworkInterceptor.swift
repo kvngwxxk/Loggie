@@ -94,7 +94,7 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
                     }
                     
                     if LoggieNetwork.printAPILatency {
-                        print("[Interceptor] API Latency: \(duration) ms")
+                        print("[LoggieNetwork] [\(pendingData.endpoint ?? "Invalid EndPoint")] API Latency: \(duration) ms")
                     }
                     
                     try context.save()
