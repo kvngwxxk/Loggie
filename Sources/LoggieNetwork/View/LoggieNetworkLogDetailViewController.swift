@@ -70,66 +70,91 @@ class LoggieNetworkLogDetailViewController: UIViewController {
     }
     
     private func setupStackView(log: LoggieNetworkLog) {
-        
+        // Timestamp
+        let timestampText: String = {
+            if let t = log.timestamp { return "\(t)" } else { return "Unable to retrieve timestamp." }
+        }()
         let timestampLabel = makeTitleLabel(text: "Timestamp")
         stackView.addArrangedSubview(timestampLabel)
         let tsSep = makeSeparatorView(length: timestampLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(tsSep)
-        if let timestamp = log.timestamp {
-            let textView = makeContentTextView(text: "\(timestamp)")
-            stackView.addArrangedSubview(textView)
-        } else {
-            let textView = makeContentTextView(text: "Unable to retrieve timestamp.")
-            stackView.addArrangedSubview(textView)
-        }
+        let tsTextView = makeContentTextView(text: timestampText)
+        stackView.addArrangedSubview(tsTextView)
+        addCopyInteraction(to: timestampLabel, textProvider: { timestampText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
-        let responseStatusCodeLabel = makeTitleLabel(text: "Response Status Code : \(log.responseStatusCode)")
-        stackView.addArrangedSubview(responseStatusCodeLabel)
-        let statusSep = makeSeparatorView(length: responseStatusCodeLabel.intrinsicContentSize.width)
+        // Response Status Code (copy only the numeric code)
+        let statusCodeLabel = makeTitleLabel(text: "Response Status Code : \(log.responseStatusCode)")
+        stackView.addArrangedSubview(statusCodeLabel)
+        let statusSep = makeSeparatorView(length: statusCodeLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(statusSep)
+        addCopyInteraction(to: statusCodeLabel, textProvider: { "\(log.responseStatusCode)" })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
+        // Duration
+        let durationText = "\(Int(log.duration))ms"
         let durationLabel = makeTitleLabel(text: "Duration")
         stackView.addArrangedSubview(durationLabel)
         let durSep = makeSeparatorView(length: durationLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(durSep)
-        stackView.addArrangedSubview(makeContentTextView(text: "\(Int(log.duration))ms"))
+        let durationTextView = makeContentTextView(text: durationText)
+        stackView.addArrangedSubview(durationTextView)
+        addCopyInteraction(to: durationLabel, textProvider: { durationText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
+        // Request URL
+        let requestURLText = log.requestURL ?? "NO REQUEST URL"
         let requestURLLabel = makeTitleLabel(text: "Request URL")
         stackView.addArrangedSubview(requestURLLabel)
         let urlSep = makeSeparatorView(length: requestURLLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(urlSep)
-        stackView.addArrangedSubview(makeContentTextView(text: log.requestURL ?? "NO REQUEST URL"))
+        let requestURLTextView = makeContentTextView(text: requestURLText)
+        stackView.addArrangedSubview(requestURLTextView)
+        addCopyInteraction(to: requestURLLabel, textProvider: { requestURLText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
+        // End Point
+        let endPointText = log.endPoint ?? "NO END POINT"
         let endPointLabel = makeTitleLabel(text: "End Point")
         stackView.addArrangedSubview(endPointLabel)
         let endSep = makeSeparatorView(length: endPointLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(endSep)
-        stackView.addArrangedSubview(makeContentTextView(text: log.endPoint ?? "NO END POINT"))
+        let endPointTextView = makeContentTextView(text: endPointText)
+        stackView.addArrangedSubview(endPointTextView)
+        addCopyInteraction(to: endPointLabel, textProvider: { endPointText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
+        // Method
+        let methodText = log.method ?? "NO METHOD"
         let methodLabel = makeTitleLabel(text: "Method")
         stackView.addArrangedSubview(methodLabel)
         let methodSep = makeSeparatorView(length: methodLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(methodSep)
-        stackView.addArrangedSubview(makeContentTextView(text: log.method ?? "NO METHOD"))
+        let methodTextView = makeContentTextView(text: methodText)
+        stackView.addArrangedSubview(methodTextView)
+        addCopyInteraction(to: methodLabel, textProvider: { methodText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
+        // Request Body
+        let requestBodyText = log.requestBody
         let requestBodyLabel = makeTitleLabel(text: "Request Body")
         stackView.addArrangedSubview(requestBodyLabel)
         let bodySep = makeSeparatorView(length: requestBodyLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(bodySep)
-        stackView.addArrangedSubview(makeContentTextView(text: log.requestBody))
+        let requestBodyTextView = makeContentTextView(text: requestBodyText)
+        stackView.addArrangedSubview(requestBodyTextView)
+        addCopyInteraction(to: requestBodyLabel, textProvider: { requestBodyText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
         
+        // Response Data
+        let responseDataText = log.responseData
         let responseDataLabel = makeTitleLabel(text: "Response Data")
         stackView.addArrangedSubview(responseDataLabel)
         let dataSep = makeSeparatorView(length: responseDataLabel.intrinsicContentSize.width)
         stackView.addArrangedSubview(dataSep)
-        stackView.addArrangedSubview(makeContentTextView(text: log.responseData))
+        let responseDataTextView = makeContentTextView(text: responseDataText)
+        stackView.addArrangedSubview(responseDataTextView)
+        addCopyInteraction(to: responseDataLabel, textProvider: { responseDataText })
         stackView.addArrangedSubview(makeSpaceView(height: 10))
     }
 }
@@ -182,10 +207,8 @@ extension LoggieNetworkLogDetailViewController {
         tv.text = text
         
         let maxWidth = view.bounds.width - 32
-        
         let fittingSize = tv.sizeThatFits(CGSize(width: maxWidth, height: .greatestFiniteMagnitude))
         let contentHeight = fittingSize.height
-        
         tv.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         
         return tv
@@ -220,5 +243,58 @@ extension LoggieNetworkLogDetailViewController {
             spacer.heightAnchor.constraint(equalToConstant: height)
         ])
         return spacer
+    }
+}
+
+// MARK: - Copy Interaction
+private final class CopyTapGestureRecognizer: UITapGestureRecognizer {
+    let textProvider: () -> String
+    init(textProvider: @escaping () -> String, target: Any?, action: Selector?) {
+        self.textProvider = textProvider
+        super.init(target: target, action: action)
+        numberOfTapsRequired = 1
+    }
+}
+
+extension LoggieNetworkLogDetailViewController {
+    private func addCopyInteraction(to view: UIView, textProvider: @escaping () -> String) {
+        view.isUserInteractionEnabled = true
+        let tap = CopyTapGestureRecognizer(textProvider: textProvider, target: self, action: #selector(handleCopyTap(_:)))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleCopyTap(_ sender: CopyTapGestureRecognizer) {
+        let text = sender.textProvider()
+        UIPasteboard.general.string = text
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        let bundle = Bundle.overrideBundle
+        showCopyToast(message: String(localized: "message.copied", bundle: bundle))
+    }
+    
+    private func showCopyToast(message: String) {
+        let toast = UILabel()
+        toast.text = " \(message) "
+        toast.textColor = .white
+        toast.font = .systemFont(ofSize: 13, weight: .medium)
+        toast.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        toast.layer.cornerRadius = 12
+        toast.layer.masksToBounds = true
+        toast.alpha = 0
+        toast.textAlignment = .center
+        toast.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toast)
+        
+        NSLayoutConstraint.activate([
+            toast.heightAnchor.constraint(equalToConstant: 34),
+            toast.widthAnchor.constraint(equalToConstant: toast.intrinsicContentSize.width + 16),
+            toast.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toast.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12)
+        ])
+        
+        UIView.animate(withDuration: 0.18, animations: { toast.alpha = 1 }) { _ in
+            UIView.animate(withDuration: 0.22, delay: 0.8, options: .curveEaseInOut, animations: { toast.alpha = 0 }) { _ in
+                toast.removeFromSuperview()
+            }
+        }
     }
 }
