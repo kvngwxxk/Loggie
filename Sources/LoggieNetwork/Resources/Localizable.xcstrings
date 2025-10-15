@@ -102,6 +102,23 @@
         }
       }
     },
+    "message.copied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied to clipboard."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "클립보드에 복사되었어요."
+          }
+        }
+      }
+    },
     "message.title.notice" : {
       "extractionState" : "manual",
       "localizations" : {
