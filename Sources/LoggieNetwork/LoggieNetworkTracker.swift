@@ -19,6 +19,29 @@ public final class LoggieNetworkTracker {
     /// Creates a new instance of the network tracker.
     public init() {}
 
+    // MARK: - URLSession Support
+
+    /// Creates a URLSession configured with Loggie network logging.
+    /// - Parameters:
+    ///   - configuration: The base configuration to use. Defaults to `.default`.
+    ///   - delegate: Optional URLSession delegate.
+    ///   - delegateQueue: Optional operation queue for delegate callbacks.
+    /// - Returns: A URLSession with Loggie logging enabled.
+    public func createURLSession(
+        configuration: URLSessionConfiguration = .default,
+        delegate: URLSessionDelegate? = nil,
+        delegateQueue: OperationQueue? = nil
+    ) -> URLSession {
+        configuration.registerLoggie()
+        return URLSession(configuration: configuration, delegate: delegate, delegateQueue: delegateQueue)
+    }
+
+    /// Registers LoggieURLProtocol with the given URLSessionConfiguration.
+    /// - Parameter configuration: The configuration to register with.
+    public func register(with configuration: URLSessionConfiguration) {
+        configuration.registerLoggie()
+    }
+
     /// Displays the floating tracker button.
     /// - Parameter presentingVC: Optional view controller context.
     @MainActor
