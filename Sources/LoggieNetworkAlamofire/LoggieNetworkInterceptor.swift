@@ -8,13 +8,16 @@
 import Foundation
 import Alamofire
 import Loggie
+import LoggieNetwork
 
-final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
-    let queue = DispatchQueue(label: "loggie.network.interceptor")
+public final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
+    public let queue = DispatchQueue(label: "loggie.network.interceptor")
     private let pendingLogs = PendingLogsStore.shared
 
+    public init() {}
+
     // MARK: - RequestAdapter
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+    public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var mutableRequest = urlRequest
         let requestID = UUID().uuidString
         mutableRequest.setValue(requestID, forHTTPHeaderField: "X-Loggie-ID")
@@ -37,14 +40,14 @@ final class LoggieNetworkInterceptor: RequestInterceptor, EventMonitor {
     }
 
     // MARK: - RequestRetrier
-    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+    public func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         let id = request.request?.value(forHTTPHeaderField: "X-Loggie-ID")
         Task { await pendingLogs.remove(id: id) }
         completion(.doNotRetry)
     }
 
     // MARK: - EventMonitor
-    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
+    public func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
         guard let req = request.request,
               let requestID = req.value(forHTTPHeaderField: "X-Loggie-ID")
         else { return }

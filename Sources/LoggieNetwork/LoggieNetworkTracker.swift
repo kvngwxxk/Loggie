@@ -9,13 +9,9 @@ import Foundation
 import SwiftUI
 import UIKit
 import Loggie
-import Alamofire
 
 /// A tracker object responsible for managing network logging UI and interceptors.
 public final class LoggieNetworkTracker {
-    /// Alamofire interceptor that captures and monitors network traffic.
-    public let interceptor: RequestInterceptor & EventMonitor = LoggieNetworkInterceptor()
-
     /// Creates a new instance of the network tracker.
     public init() {}
 

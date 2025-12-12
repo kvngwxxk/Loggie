@@ -8,18 +8,25 @@ import Foundation
 import CoreData
 
 /// Stores pending request metadata temporarily in memory using an actor for concurrency safety.
-actor PendingLogsStore {
-    static let shared = PendingLogsStore()
-    
+public actor PendingLogsStore {
+    public static let shared = PendingLogsStore()
+
     /// Metadata for a request being tracked.
-    struct RequestData {
-        let requestURL: String?
-        let method: String?
-        let body: Data?
-        let startTime: Date
+    public struct RequestData {
+        public let requestURL: String?
+        public let method: String?
+        public let body: Data?
+        public let startTime: Date
+
+        public init(requestURL: String?, method: String?, body: Data?, startTime: Date) {
+            self.requestURL = requestURL
+            self.method = method
+            self.body = body
+            self.startTime = startTime
+        }
 
         /// Returns the URL path component from the request URL, if available.
-        var endpoint: String? {
+        public var endpoint: String? {
             guard let url = requestURL else { return nil }
             return URL(string: url)?.path
         }
@@ -32,28 +39,28 @@ actor PendingLogsStore {
     /// - Parameters:
     ///   - id: Unique identifier for the request.
     ///   - data: The associated request metadata.
-    func set(id: String, data: RequestData) {
+    public func set(id: String, data: RequestData) {
         store[id] = data
     }
 
     /// Retrieves stored request data by identifier.
     /// - Parameter id: The identifier of the request.
     /// - Returns: Stored `RequestData` if available.
-    func get(id: String?) -> RequestData? {
+    public func get(id: String?) -> RequestData? {
         guard let id else { return nil }
         return store[id]
     }
 
     /// Removes stored request data for the given identifier.
     /// - Parameter id: The identifier of the request to remove.
-    func remove(id: String?) {
+    public func remove(id: String?) {
         guard let id else { return }
         store.removeValue(forKey: id)
     }
 }
 
-extension NSManagedObjectContext {
-    /// Asynchronously performs a throwing block inside the context’s queue and awaits the result.
+public extension NSManagedObjectContext {
+    /// Asynchronously performs a throwing block inside the context's queue and awaits the result.
     /// - Parameter block: A closure that returns a value or throws.
     /// - Returns: The result of the closure if successful.
     func performAsync<T>(_ block: @escaping () throws -> T) async throws -> T {

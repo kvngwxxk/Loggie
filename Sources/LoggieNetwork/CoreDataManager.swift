@@ -6,9 +6,9 @@
 //
 import CoreData
 
-final class CoreDataManager {
+public final class CoreDataManager {
     /// Shared singleton instance of the CoreDataManager.
-    nonisolated(unsafe) static let shared = CoreDataManager()
+    nonisolated(unsafe) public static let shared = CoreDataManager()
 
     /// Lazy-loaded persistent container for Core Data stack initialization.
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -36,7 +36,7 @@ final class CoreDataManager {
     var context: NSManagedObjectContext { persistentContainer.viewContext }
 
     /// Returns a new background context for background tasks.
-    func backgroundContext() -> NSManagedObjectContext {
+    public func backgroundContext() -> NSManagedObjectContext {
         persistentContainer.newBackgroundContext()
     }
 
