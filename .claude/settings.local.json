@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(swift build:*)",
+      "Bash(xcodebuild:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nrefactor: Alamofire를 선택적 의존성으로 분리\n\n- LoggieNetwork: URLSession만 지원 (Alamofire 의존성 없음)\n- LoggieNetworkAlamofire: Alamofire 지원 (새 타겟)\n- PendingLogsStore, CoreDataManager public 접근 레벨로 변경\n- LoggieNetworkInterceptor를 LoggieNetworkAlamofire로 이동\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

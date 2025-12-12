@@ -24,6 +24,19 @@ It supports console logging, file logging, OSLog integration, and a floating UI 
 .package(url: "https://github.com/kvngwxxk/Loggie.git", from: "1.0.2")
 ```
 
+Then add the products you need to your target:
+
+```swift
+.target(
+    name: "YourApp",
+    dependencies: [
+        "Loggie",                    // Basic logging
+        "LoggieNetwork",             // Network logging (URLSession)
+        "LoggieNetworkAlamofire",    // Network logging (Alamofire) - optional
+    ]
+)
+```
+
 ### CocoaPods
 
 ```ruby
@@ -101,8 +114,8 @@ The output will be:
 
 ## 🌐 Network Logging (LoggieNetwork)
 
-**LoggieNetwork** makes it easy to track and inspect network activity in your app.  
-It automatically logs your **Alamofire requests and responses**, and provides a **floating button UI** to browse the logs in real time.
+**LoggieNetwork** makes it easy to track and inspect network activity in your app.
+It supports both **URLSession** and **Alamofire**, and provides a **floating button UI** to browse the logs in real time.
 
 No need to manually print or debug – just turn it on and you're ready to go.
 
@@ -113,23 +126,59 @@ No need to manually print or debug – just turn it on and you're ready to go.
 > 2. **Log List Screen** – View a scrollable list of recent network logs.
 > 3. **Log Detail View** – Inspect headers, bodies, and status codes of selected logs.
 
-### Basic Setup with Alamofire
+### Choosing the Right Package
 
-If you're only using `LoggieNetwork`:
+| Package | Dependency | Use Case |
+|---------|------------|----------|
+| `LoggieNetwork` | None | URLSession only |
+| `LoggieNetworkAlamofire` | Alamofire | URLSession + Alamofire |
+
+### Basic Setup with URLSession
 
 ```swift
-let LoggieInterceptor = LoggieNetwork.tracker.interceptor
+import LoggieNetwork
+
+// Option 1: Create a session with Loggie logging
+let session = LoggieNetwork.tracker.createURLSession()
+
+// Option 2: Use pre-configured URLSessionConfiguration
+let config = URLSessionConfiguration.loggieDefault
+let session = URLSession(configuration: config)
+
+// Option 3: Register Loggie to existing configuration
+let config = URLSessionConfiguration.default
+config.registerLoggie()
+let session = URLSession(configuration: config)
+
+// Make requests as usual - they will be automatically logged
+session.dataTask(with: url) { data, response, error in
+    // ...
+}.resume()
+```
+
+### Basic Setup with Alamofire
+
+To use Alamofire support, import `LoggieNetworkAlamofire`:
+
+```swift
+import LoggieNetwork
+import LoggieNetworkAlamofire
+
+let loggieInterceptor = LoggieNetwork.tracker.interceptor
 
 let session = Session(
     configuration: .default,
-    interceptor: LoggieInterceptor,
-    eventMonitors: [LoggieInterceptor]
+    interceptor: loggieInterceptor,
+    eventMonitors: [loggieInterceptor]
 )
 ```
 
 If you also use a custom interceptor (e.g., auth handling), combine them manually:
 
 ```swift
+import LoggieNetwork
+import LoggieNetworkAlamofire
+
 let tokenInterceptor = TokenInterceptor(authManager: authManager)
 let loggieInterceptor = LoggieNetwork.tracker.interceptor
 
@@ -146,7 +195,7 @@ let session = Session(
 )
 ```
 
-> LoggieNetwork works well with custom interceptors by simply including its interceptor in `eventMonitors` and `interceptors`.
+> LoggieNetworkAlamofire works well with custom interceptors by simply including its interceptor in `eventMonitors` and `interceptors`.
 
 
 ### 2. Floating Tracker UI
